@@ -1,4 +1,4 @@
-- dashboard: demand_shaping__alerts_detail_dashboard_forecast_outside_statistical_range
+- dashboard: alert_details_forecasting_outside_statistical_range
   title: Demand Shaping - Alerts Detail Dashboard (Forecast Outside Statistical Range)
   layout: newspaper
   preferred_viewer: dashboards-next

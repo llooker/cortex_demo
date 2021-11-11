@@ -9,7 +9,7 @@ WITH
     FROM
       CAST(Date AS Date)) week_of_year
   FROM
-    `cortex-demo-environment.DemoIntelligence.AggregatedResultsDevAds` )
+    `looker-private-demo.DemoIntelligence.AggregatedResultsDevAds` )
 SELECT
   a.*,
   b.average_temperature,
@@ -24,7 +24,7 @@ LEFT JOIN (
     LocationDMA,
     AVG(CAST(TemperatureInFahrenheit AS numeric)) average_temperature
   FROM
-    `cortex-demo-environment.DemoIntelligence.AggregatedResultsDevAds`
+    `looker-private-demo.DemoIntelligence.AggregatedResultsDevAds`
   WHERE
     LocationDMA='Boston'
   GROUP BY

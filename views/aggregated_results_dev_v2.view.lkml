@@ -17,7 +17,7 @@ view: aggregated_results_dev_v2 {
                             ProductName,
                             LocationDMA
                       ORDER BY DATE ASC) as rank
-    FROM `cortex-demo-environment.DemoIntelligence.AggregatedResultsDev_v4`
+    FROM `looker-private-demo.DemoIntelligence.AggregatedResultsDev_v4`
     WHERE DifferentialAlert = 'Forecast Outside Statistical Range'
     AND CAST (DATE AS DATE) > CAST ('2021-05-23' AS DATE)
     )
@@ -36,7 +36,7 @@ view: aggregated_results_dev_v2 {
       Past13WeeksUnitsSold,
       Past52WeeksUnitsSold,
       ExpectedDifferentialImpact
-    FROM `cortex-demo-environment.DemoIntelligence.AggregatedResultsDev_v4`
+    FROM `looker-private-demo.DemoIntelligence.AggregatedResultsDev_v4`
     WHERE DifferentialAlert = 'Promo Differential'
 
     UNION ALL
@@ -50,7 +50,7 @@ view: aggregated_results_dev_v2 {
       Past13WeeksUnitsSold,
       Past52WeeksUnitsSold,
       ExpectedDifferentialImpact
-    FROM `cortex-demo-environment.DemoIntelligence.AggregatedResultsDev_v4`
+    FROM `looker-private-demo.DemoIntelligence.AggregatedResultsDev_v4`
     WHERE DifferentialAlert = 'Heat Wave'
 
     UNION ALL
@@ -71,7 +71,7 @@ view: aggregated_results_dev_v2 {
                             ProductName,
                             LocationDMA) AS rank
       FROM
-        `cortex-demo-environment.DemoIntelligence.AggregatedResultsDev_v4`
+        `looker-private-demo.DemoIntelligence.AggregatedResultsDev_v4`
       WHERE DifferentialAlert = 'Non-seasonal Google Trend'
       AND CAST(Date as DATE) < CAST('2021-05-23' AS DATE)
     ) as tb
@@ -88,7 +88,7 @@ view: aggregated_results_dev_v2 {
       Past52WeeksUnitsSold,
       ExpectedDifferentialImpact
     FROM
-      `cortex-demo-environment.DemoIntelligence.AggregatedResultsDev_v4`
+      `looker-private-demo.DemoIntelligence.AggregatedResultsDev_v4`
       WHERE DifferentialAlert='Ad Spend Variance'
   )
 

@@ -1,5 +1,5 @@
 view: aggregated_results_dev {
-  sql_table_name: `cortex-demo-environment.DemoIntelligence.AggregatedResultsDev`
+  sql_table_name: `looker-private-demo.DemoIntelligence.AggregatedResultsDev`
     ;;
 
   dimension: catalog_item_id {

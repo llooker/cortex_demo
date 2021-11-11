@@ -1,4 +1,4 @@
-- dashboard: demand_shaping__alerts_detail_dashboard_temperature
+- dashboard: alert_detail_temp
   title: Demand Shaping - Alerts Detail Dashboard (Temperature)
   layout: newspaper
   preferred_viewer: dashboards-next

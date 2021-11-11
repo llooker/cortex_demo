@@ -1,4 +1,4 @@
-- dashboard: demand_shaping__alerts_summary_dashboard
+- dashboard: alert_summary
   title: Demand Shaping - Alerts Summary Dashboard
   layout: newspaper
   preferred_viewer: dashboards-next

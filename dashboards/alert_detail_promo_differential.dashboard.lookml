@@ -1,5 +1,5 @@
-- dashboard: demand_shaping__alerts_detail_dashboard_forecast_outside_statistical_range
-  title: Demand Shaping - Alerts Detail Dashboard (Forecast Outside Statistical Range)
+- dashboard: demand_shaping__alerts_detail_dashboard_promo_differential
+  title: Demand Shaping - Alerts Detail Dashboard (Promo Differential)
   layout: newspaper
   preferred_viewer: dashboards-next
   elements:
@@ -18,11 +18,11 @@
     model: cortex_dev_v2
     explore: aggregated_results_dev_v2_2
     type: looker_line
-    fields: [aggregated_results_dev_v2_2.temperature, aggregated_results_dev_v2_2.date_week,
-      aggregated_results_dev_v2_2.past_sales_quantity, aggregated_results_dev_v2_2.wholesale_quantity_measure,
-      aggregated_results_dev_v2_2.moving_average_tempearture, aggregated_results_dev_v2_2.forecast,
+    fields: [aggregated_results_dev_v2_2.date_week, aggregated_results_dev_v2_2.past_sales_quantity,
+      aggregated_results_dev_v2_2.wholesale_quantity_measure, aggregated_results_dev_v2_2.temperature,
+      aggregated_results_dev_v2_2.temperature_forecast, aggregated_results_dev_v2_2.forecast,
       aggregated_results_dev_v2_2.forecast_lower, aggregated_results_dev_v2_2.forecast_upper,
-      aggregated_results_dev_v2_2.demand_plan_after_May, aggregated_results_dev_v2_2.temperature_forecast]
+      aggregated_results_dev_v2_2.demand_plan_after_May, aggregated_results_dev_v2_2.moving_average_tempearture]
     fill_fields: [aggregated_results_dev_v2_2.date_week]
     sorts: [aggregated_results_dev_v2_2.date_week]
     limit: 500
@@ -54,20 +54,21 @@
             id: aggregated_results_dev_v2_2.temperature, name: Temperature}, {axisId: aggregated_results_dev_v2_2.temperature_forecast,
             id: aggregated_results_dev_v2_2.temperature_forecast, name: Temperature
               Forecast}, {axisId: aggregated_results_dev_v2_2.moving_average_tempearture,
-            id: aggregated_results_dev_v2_2.moving_average_tempearture, name: Moving
-              Average Tempearture}], showLabels: true, showValues: true, maxValue: 120,
-        unpinAxis: false, tickDensity: default, tickDensityCustom: 5, type: linear},
-      {label: Quantity, orientation: right, series: [{axisId: aggregated_results_dev_v2_2.past_sales_quantity,
+            id: aggregated_results_dev_v2_2.moving_average_tempearture, name: Historical
+              Average Teperature}], showLabels: true, showValues: true, unpinAxis: false,
+        tickDensity: default, tickDensityCustom: 5, type: linear}, {label: Quantity,
+        orientation: right, series: [{axisId: aggregated_results_dev_v2_2.past_sales_quantity,
             id: aggregated_results_dev_v2_2.past_sales_quantity, name: Retail Units
-              Sold}, {axisId: aggregated_results_dev_v2_2.forecast, id: aggregated_results_dev_v2_2.forecast,
-            name: Forecast}, {axisId: aggregated_results_dev_v2_2.wholesale_quantity_measure,
+              Sold}, {axisId: aggregated_results_dev_v2_2.wholesale_quantity_measure,
             id: aggregated_results_dev_v2_2.wholesale_quantity_measure, name: Customer
-              Units Sold}, {axisId: aggregated_results_dev_v2_2.forecast_lower, id: aggregated_results_dev_v2_2.forecast_lower,
-            name: Forecast Lower}, {axisId: aggregated_results_dev_v2_2.forecast_upper,
-            id: aggregated_results_dev_v2_2.forecast_upper, name: Forecast Upper},
-          {axisId: aggregated_results_dev_v2_2.demand_plan_after_May, id: aggregated_results_dev_v2_2.demand_plan_after_May,
-            name: Demand Plan After May}], showLabels: true, showValues: true, unpinAxis: true,
-        tickDensity: default, tickDensityCustom: 5, type: linear}]
+              Units Sold}, {axisId: aggregated_results_dev_v2_2.forecast, id: aggregated_results_dev_v2_2.forecast,
+            name: Forecast}, {axisId: aggregated_results_dev_v2_2.forecast_lower,
+            id: aggregated_results_dev_v2_2.forecast_lower, name: Forecast Lower},
+          {axisId: aggregated_results_dev_v2_2.forecast_upper, id: aggregated_results_dev_v2_2.forecast_upper,
+            name: Forecast Upper}, {axisId: aggregated_results_dev_v2_2.demand_plan_after_May,
+            id: aggregated_results_dev_v2_2.demand_plan_after_May, name: Total Demand
+              Plan}], showLabels: true, showValues: true, unpinAxis: true, tickDensity: default,
+        tickDensityCustom: 5, type: linear}]
     hide_legend: true
     series_types:
       aggregated_results_dev_v2_2.temperature: column
@@ -79,15 +80,20 @@
       aggregated_results_dev_v2_2.forecast: "#7CB342"
       aggregated_results_dev_v2_2.forecast_lower: "#c8de9d"
       aggregated_results_dev_v2_2.forecast_upper: "#c8de9d"
-      aggregated_results_dev_v2_2.moving_average_tempearture: "#80868B"
-      aggregated_results_dev_v2_2.demand_plan_after_May: "#EA4335"
       aggregated_results_dev_v2_2.temperature_forecast: "#a7ccc2"
+      aggregated_results_dev_v2_2.demand_plan_after_May: "#EA4335"
+      aggregated_results_dev_v2_2.moving_average_tempearture: "#80868B"
     series_labels:
       aggregated_results_dev_v2_2.past_sales_quantity: Retail Units Sold
       aggregated_results_dev_v2_2.wholesale_quantity_measure: Customer Units Sold
-      aggregated_results_dev_v2_2.moving_average_tempearture: Historical Average Temperature
+      aggregated_results_dev_v2_2.forecast_lower: Forecast Lower
+      aggregated_results_dev_v2_2.forecast_upper: Forecast Upper
+      aggregated_results_dev_v2_2.demand_plan_after_May: Total Demand Plan
+      aggregated_results_dev_v2_2.moving_average_tempearture: Historical Average Teperature
     x_axis_datetime_label: "%b %Y"
-    reference_lines: []
+    reference_lines: [{reference_type: range, line_value: mean, margin_top: deviation,
+        margin_value: mean, margin_bottom: deviation, label_position: right, color: "#F9AB00",
+        range_start: '65', range_end: '75'}]
     ordering: none
     show_null_labels: false
     show_totals_labels: false
@@ -167,10 +173,10 @@
       Customer: aggregated_results_dev_v2_2.customer_name
       Ship to Location: aggregated_results_dev_v2_2.location_dma
       Date Range: aggregated_results_dev_v2_2.date_date
-    row: 0
-    col: 4
-    width: 20
-    height: 8
+    row: 8
+    col: 12
+    width: 6
+    height: 4
   - title: Google Trends Insights
     name: Google Trends Insights
     model: cortex_dev_v2
@@ -321,10 +327,10 @@
       Customer: aggregated_results_dev_v2_2.customer_name
       Ship to Location: aggregated_results_dev_v2_2.location_dma
       Date Range: aggregated_results_dev_v2_2.date_date
-    row: 8
-    col: 12
-    width: 6
-    height: 4
+    row: 0
+    col: 4
+    width: 20
+    height: 8
   - title: KPI
     name: KPI
     model: cortex_dev_v2
@@ -339,6 +345,7 @@
     show_view_names: false
     font_size_main: '10'
     orientation: vertical
+    dividers: false
     style_aggregated_results_dev_v2_2.thirteen_week_forecast: "#3A4245"
     show_title_aggregated_results_dev_v2_2.thirteen_week_forecast: true
     title_override_aggregated_results_dev_v2_2.thirteen_week_forecast: 13-Week Forecast
@@ -358,7 +365,6 @@
     title_placement_aggregated_results_dev_v2_2.fifty_two_week_sales_volume: below
     value_format_aggregated_results_dev_v2_2.fifty_two_week_sales_volume: ''
     show_comparison_aggregated_results_dev_v2_2.fifty_two_week_sales_volume: false
-    dividers: false
     show_comparison_aggregated_results_dev_v2_2.thirteen_week_forecast: false
     x_axis_gridlines: false
     y_axis_gridlines: true
@@ -490,7 +496,7 @@
   - name: Product Name
     title: Product Name
     type: field_filter
-    default_value: Mayo
+    default_value: Watermelon Cooler
     allow_multiple_values: true
     required: false
     ui_config:

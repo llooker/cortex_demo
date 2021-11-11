@@ -9,7 +9,7 @@ view: aggregated_results_testharness_2 {
         FROM
           CAST(Date AS Date)) week_of_year
       FROM
-        `cortex-demo-environment.TestHarness_CortexIntelligence.AggregatedResults` )
+        `looker-private-demo.TestHarness_CortexIntelligence.AggregatedResults` )
     SELECT
       a.*,
       b.average_temperature,
@@ -24,7 +24,7 @@ view: aggregated_results_testharness_2 {
         LocationDMA,
         AVG(CAST(TemperatureInFahrenheit AS numeric)) average_temperature
       FROM
-        `cortex-demo-environment.TestHarness_CortexIntelligence.AggregatedResults`
+        `looker-private-demo.TestHarness_CortexIntelligence.AggregatedResults`
       WHERE
         LocationDMA='Boston (Manchester)'
       GROUP BY
