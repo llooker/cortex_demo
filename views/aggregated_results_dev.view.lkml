@@ -154,7 +154,7 @@ view: aggregated_results_dev {
       sql: ${TABLE}.DifferentialAlert ;;
       link: {
         label: "Detail Dashboard"
-        url: "https://cortex.cloud.looker.com/dashboards-next/{{url_field._value}}?Product+Name={{ product_name._value }}&Ship+to+Location={{location_dma._value}}&Customer={{customer_name._value}}"
+        url: "/dashboards-next/{{url_field._value}}?Product+Name={{ product_name._value }}&Ship+to+Location={{location_dma._value}}&Customer={{customer_name._value}}"
         icon_url: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/279/magnifying-glass-tilted-left_1f50d.png"
       }
     }
@@ -179,7 +179,7 @@ view: aggregated_results_dev {
       sql: ${TABLE}.DifferentialAlert ;;
       link: {
         label: "Detail Dashboard"
-        url: "https://cortex.cloud.looker.com/dashboards-next/{{url_field_2._value}}?Product+Name={{ product_name._value }}&Ship+to+Location={{location_dma._value}}&Customer={{customer_name._value}}"
+        url: "/{{url_field_2._value}}?Product+Name={{ product_name._value }}&Ship+to+Location={{location_dma._value}}&Customer={{customer_name._value}}"
         icon_url: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/279/magnifying-glass-tilted-left_1f50d.png"
       }
     }
