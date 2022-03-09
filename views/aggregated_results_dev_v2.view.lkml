@@ -220,7 +220,7 @@ view: aggregated_results_dev_v2 {
           End ;;
         link: {
           label: "Detail Dashboard"
-          url: "/dashboards/{{url_field._value}}?Product+Name={{ product_name._value }}&Customer={{customer_name._value}}&Ship+to+Location={{location_dma._value}}"
+          url: "/dashboards/1103?Product+Name={{ product_name._value }}&Customer={{customer_name._value}}&Ship+to+Location={{location_dma._value}}"
           icon_url: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/279/magnifying-glass-tilted-left_1f50d.png"
         }
       }
