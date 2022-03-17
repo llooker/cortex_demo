@@ -204,6 +204,7 @@ view: aggregated_results_dev_v2 {
           WHEN ${differential_alert} = 'Storm' THEN ('1100')
           WHEN ${differential_alert} like 'Heat%' THEN ('1100')
           WHEN ${differential_alert} = 'Non-seasonal Google Trend' THEN ('1099')
+          WHEN ${differential_alert} = 'Ad Spend Variance' THEN ('1103')
           ELSE Null
         END ;;
   }
