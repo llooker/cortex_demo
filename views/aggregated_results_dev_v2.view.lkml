@@ -199,11 +199,11 @@ view: aggregated_results_dev_v2 {
     type: string
     sql:
          CASE
-          WHEN ${differential_alert} = 'Forecast Outside Statistical Range' THEN ('cortex_dev_v2::alert_details_forecasting_outside_statistical_range')
-          WHEN ${differential_alert} = 'Promo Differential' THEN ('cortex_dev_v2::demand_shaping__alerts_detail_dashboard_promo_differential')
-          WHEN ${differential_alert} = 'Storm' THEN ('cortex_dev_v2::alert_detail_temp')
-          WHEN ${differential_alert} like 'Heat%' THEN ('cortex_dev_v2::alert_detail_temp')
-          WHEN ${differential_alert} = 'Non-seasonal Google Trend' THEN ('cortex_dev_v2::alert_detail_trends')
+          WHEN ${differential_alert} = 'Forecast Outside Statistical Range' THEN ('1098')
+          WHEN ${differential_alert} = 'Promo Differential' THEN ('1102')
+          WHEN ${differential_alert} = 'Storm' THEN ('1100')
+          WHEN ${differential_alert} like 'Heat%' THEN ('1100')
+          WHEN ${differential_alert} = 'Non-seasonal Google Trend' THEN ('1099')
           ELSE Null
         END ;;
   }
@@ -220,7 +220,7 @@ view: aggregated_results_dev_v2 {
           End ;;
         link: {
           label: "Detail Dashboard"
-          url: "/dashboards/1103?Product+Name={{ product_name._value }}&Customer={{customer_name._value}}&Ship+to+Location={{location_dma._value}}"
+          url: "/dashboards/{{url_field._value}}?Product+Name={{ product_name._value }}&Customer={{customer_name._value}}&Ship+to+Location={{location_dma._value}}"
           icon_url: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/279/magnifying-glass-tilted-left_1f50d.png"
         }
       }
