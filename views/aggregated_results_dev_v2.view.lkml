@@ -17,9 +17,9 @@ view: aggregated_results_dev_v2 {
                             ProductName,
                             LocationDMA
                       ORDER BY DATE ASC) as rank
-    FROM `looker-private-demo.DemoIntelligence.AggregatedResultsDev_v4`
+    FROM `cortex-central-demo-project.40_SAP_REPORTING.AggregatedResultsDev_v4`
     WHERE DifferentialAlert = 'Forecast Outside Statistical Range'
-    AND CAST (DATE AS DATE) > CAST ('2021-05-23' AS DATE)
+    AND CAST (DATE AS DATE) > CAST ('2022-05-23' AS DATE)
     )
    SELECT * EXCEPT (rank)
    FROM tmp
@@ -36,7 +36,7 @@ view: aggregated_results_dev_v2 {
       Past13WeeksUnitsSold,
       Past52WeeksUnitsSold,
       ExpectedDifferentialImpact
-    FROM `looker-private-demo.DemoIntelligence.AggregatedResultsDev_v4`
+    FROM `cortex-central-demo-project.40_SAP_REPORTING.AggregatedResultsDev_v4`
     WHERE DifferentialAlert = 'Promo Differential'
 
     UNION ALL
@@ -50,7 +50,7 @@ view: aggregated_results_dev_v2 {
       Past13WeeksUnitsSold,
       Past52WeeksUnitsSold,
       ExpectedDifferentialImpact
-    FROM `looker-private-demo.DemoIntelligence.AggregatedResultsDev_v4`
+    FROM `cortex-central-demo-project.40_SAP_REPORTING.AggregatedResultsDev_v4`
     WHERE DifferentialAlert = 'Heat Wave'
 
     UNION ALL
@@ -71,9 +71,9 @@ view: aggregated_results_dev_v2 {
                             ProductName,
                             LocationDMA) AS rank
       FROM
-        `looker-private-demo.DemoIntelligence.AggregatedResultsDev_v4`
+        `cortex-central-demo-project.40_SAP_REPORTING.AggregatedResultsDev_v4`
       WHERE DifferentialAlert = 'Non-seasonal Google Trend'
-      AND CAST(Date as DATE) < CAST('2021-05-23' AS DATE)
+      AND CAST(Date as DATE) < CAST('2022-05-23' AS DATE)
     ) as tb
     WHERE rank=1
 
@@ -88,7 +88,7 @@ view: aggregated_results_dev_v2 {
       Past52WeeksUnitsSold,
       ExpectedDifferentialImpact
     FROM
-      `looker-private-demo.DemoIntelligence.AggregatedResultsDev_v4`
+      `cortex-central-demo-project.40_SAP_REPORTING.AggregatedResultsDev_v4`
       WHERE DifferentialAlert='Ad Spend Variance'
   )
 
@@ -117,7 +117,7 @@ view: aggregated_results_dev_v2 {
       type: string
       sql:
         CASE
-          WHEN ${TABLE}.ProductName='Lemonade' and ${TABLE}.LocationDMA='Boston' and CAST(${TABLE}.Date AS DATE)=CAST('2021-05-30' AS DATE)
+          WHEN ${TABLE}.ProductName='Lemonade' and ${TABLE}.LocationDMA='Boston' and CAST(${TABLE}.Date AS DATE)=CAST('2022-05-30' AS DATE)
           THEN 'Heat Wave'
         Else
           ${TABLE}.DifferentialAlert
@@ -128,7 +128,7 @@ view: aggregated_results_dev_v2 {
       type: number
       sql:
         CASE
-          WHEN ${TABLE}.ProductName='Lemonade' and ${TABLE}.LocationDMA='Boston' and CAST(${TABLE}.Date AS DATE)=CAST('2021-05-30' AS DATE)
+          WHEN ${TABLE}.ProductName='Lemonade' and ${TABLE}.LocationDMA='Boston' and CAST(${TABLE}.Date AS DATE)=CAST('2022-05-30' AS DATE)
           THEN 81
           ELSE
           CAST(${TABLE}.ExpectedDifferentialImpact as NUMERIC)
@@ -199,12 +199,12 @@ view: aggregated_results_dev_v2 {
     type: string
     sql:
          CASE
-          WHEN ${differential_alert} = 'Forecast Outside Statistical Range' THEN ('1098')
-          WHEN ${differential_alert} = 'Promo Differential' THEN ('1102')
-          WHEN ${differential_alert} = 'Storm' THEN ('1100')
-          WHEN ${differential_alert} like 'Heat%' THEN ('1100')
-          WHEN ${differential_alert} = 'Non-seasonal Google Trend' THEN ('1099')
-          WHEN ${differential_alert} = 'Ad Spend Variance' THEN ('1103')
+          WHEN ${differential_alert} = 'Forecast Outside Statistical Range' THEN ('alert_details_forecasting_outside_statistical_range')
+          WHEN ${differential_alert} = 'Promo Differential' THEN ('demand_sensing__alerts_detail_dashboard_promo_differential')
+          WHEN ${differential_alert} = 'Storm' THEN ('alert_detail_temp')
+          WHEN ${differential_alert} like 'Heat%' THEN ('alert_detail_temp')
+          WHEN ${differential_alert} = 'Non-seasonal Google Trend' THEN ('alert_detail_trends')
+          WHEN ${differential_alert} = 'Ad Spend Variance' THEN ('alert_detail_ads')
           ELSE Null
         END ;;
   }
@@ -214,14 +214,14 @@ view: aggregated_results_dev_v2 {
         type: string
         sql:
           CASE
-            WHEN ${TABLE}.ProductName='Lemonade' and ${TABLE}.LocationDMA='Boston' and CAST(${TABLE}.Date AS DATE)=CAST('2021-05-30' AS DATE)
+            WHEN ${TABLE}.ProductName='Lemonade' and ${TABLE}.LocationDMA='Boston' and CAST(${TABLE}.Date AS DATE)=CAST('2022-05-30' AS DATE)
             THEN 'Heat Wave'
           Else
             ${TABLE}.DifferentialAlert
           End ;;
         link: {
           label: "Detail Dashboard"
-          url: "/dashboards/{{url_field._value}}?Product+Name={{ product_name._value }}&Customer={{customer_name._value}}&Ship+to+Location={{location_dma._value}}"
+          url: "/dashboards/cortex_dem_sens::{{url_field._value}}?Product+Name={{ product_name._value }}&Customer={{customer_name._value}}&Ship+to+Location={{location_dma._value}}"
           icon_url: "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/279/magnifying-glass-tilted-left_1f50d.png"
         }
       }
@@ -239,7 +239,7 @@ view: aggregated_results_dev_v2 {
             WHEN ${TABLE}.ProductName like 'Watermelon%'
             AND ${TABLE}.CustomerName='Bulls Eye'
             AND ${TABLE}.LocationDMA like 'Boston%'
-            AND CAST(${TABLE}.Date AS DATE) = CAST('2021-05-23' AS DATE)
+            AND CAST(${TABLE}.Date AS DATE) = CAST('2022-05-23' AS DATE)
             AND ${TABLE}.DifferentialAlert ='Forecast Outside Statistical Range'
             THEN 10
             WHEN ${TABLE}.ProductName like 'Watermelon%'
@@ -276,7 +276,7 @@ view: aggregated_results_dev_v2 {
           type: sum
           sql:
               CASE
-                WHEN CAST(${TABLE}.Date AS DATE) >= CAST ('2021-05-23' AS DATE) and DATE_DIFF(Cast(${TABLE}.Date as Date), CAST ('2021-05-23' AS DATE), Day)<=91
+                WHEN CAST(${TABLE}.Date AS DATE) >= CAST ('2022-05-23' AS DATE) and DATE_DIFF(Cast(${TABLE}.Date as Date), CAST ('2022-05-23' AS DATE), Day)<=91
                 THEN ${mlforecast_quantity}
               END ;;
           value_format_name: decimal_0
@@ -287,7 +287,7 @@ view: aggregated_results_dev_v2 {
           type: sum
           sql:
               CASE
-                WHEN CAST(${TABLE}.Date AS DATE) <= CAST ('2021-05-23' AS DATE) and DATE_DIFF(CAST ('2021-05-23' AS DATE), Cast(${TABLE}.Date as Date), Day)<=91
+                WHEN CAST(${TABLE}.Date AS DATE) <= CAST ('2022-05-23' AS DATE) and DATE_DIFF(CAST ('2022-05-23' AS DATE), Cast(${TABLE}.Date as Date), Day)<=91
                 THEN ${quantity}
               END ;;
           value_format_name: decimal_0
@@ -297,7 +297,7 @@ view: aggregated_results_dev_v2 {
           type: sum
           sql:
               CASE
-                WHEN CAST(${TABLE}.Date AS DATE) <= CAST ('2021-05-23' AS DATE) and DATE_DIFF(CAST ('2021-05-23' AS DATE), Cast(${TABLE}.Date as Date), Day)<=366
+                WHEN CAST(${TABLE}.Date AS DATE) <= CAST ('2022-05-23' AS DATE) and DATE_DIFF(CAST ('2022-05-23' AS DATE), Cast(${TABLE}.Date as Date), Day)<=366
                 THEN ${quantity}
               END ;;
           value_format_name: decimal_0

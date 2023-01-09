@@ -1,4 +1,4 @@
-connection: "looker-private-demo"
+connection: "cortex-central-demo-project"
 
 include: "/views/*.view.lkml"
 include: "/dashboards/*.dashboard"

@@ -9,7 +9,7 @@ WITH
     FROM
       CAST(Date AS Date)) week_of_year
   FROM
-    `looker-private-demo.DemoIntelligence.AggregatedResultsDevAds` )
+    `cortex-central-demo-project.40_SAP_REPORTING.AggregatedResultsDevAds` )
 SELECT
   a.*,
   b.average_temperature,
@@ -24,7 +24,7 @@ LEFT JOIN (
     LocationDMA,
     AVG(CAST(TemperatureInFahrenheit AS numeric)) average_temperature
   FROM
-    `looker-private-demo.DemoIntelligence.AggregatedResultsDevAds`
+    `cortex-central-demo-project.40_SAP_REPORTING.AggregatedResultsDevAds`
   WHERE
     LocationDMA='Boston'
   GROUP BY
@@ -184,11 +184,11 @@ ON
     type: string
     sql:
          CASE
-          WHEN ${differential_alert} = 'Forecast Outside Statistical Range' THEN ('cortex_dev_v2::alert_details_forecasting_outside_statistical_range')
-          WHEN ${differential_alert} = 'Promo Differential' THEN ('cortex_dev_v2::demand_shaping__alerts_detail_dashboard_promo_differential')
-          WHEN ${differential_alert} = 'Storm' THEN ('cortex_dev_v2::alert_detail_temp')
-          WHEN ${differential_alert} like 'Heat%' THEN ('cortex_dev_v2::alert_detail_temp')
-          WHEN ${differential_alert} = 'Non-seasonal Google Trend' THEN ('cortex_dev_v2::alert_detail_trends')
+          WHEN ${differential_alert} = 'Forecast Outside Statistical Range' THEN ('cortex_dem_sens::alert_details_forecasting_outside_statistical_range')
+          WHEN ${differential_alert} = 'Promo Differential' THEN ('cortex_dem_sens::demand_sensing__alerts_detail_dashboard_promo_differential')
+          WHEN ${differential_alert} = 'Storm' THEN ('cortex_dem_sens::alert_detail_temp')
+          WHEN ${differential_alert} like 'Heat%' THEN ('cortex_dem_sens::alert_detail_temp')
+          WHEN ${differential_alert} = 'Non-seasonal Google Trend' THEN ('cortex_dem_sens::alert_detail_trends')
           ELSE Null
         END ;;
   }
@@ -264,7 +264,7 @@ ON
     type: sum
     sql:
       CASE
-        WHEN CAST(${TABLE}.Date AS DATE) >= CAST ('2021-05-23' AS DATE) and DATE_DIFF(Cast(${TABLE}.Date as Date), CAST ('2021-05-23' AS DATE), Day)<=91
+        WHEN CAST(${TABLE}.Date AS DATE) >= CAST ('2022-05-23' AS DATE) and DATE_DIFF(Cast(${TABLE}.Date as Date), CAST ('2022-05-23' AS DATE), Day)<=91
         THEN ${mlforecast_quantity}
       END ;;
     value_format_name: decimal_0
@@ -274,7 +274,7 @@ ON
     type: sum
     sql:
       CASE
-        WHEN CAST(${TABLE}.Date AS DATE) <= CAST ('2021-05-23' AS DATE) and DATE_DIFF(CAST ('2021-05-23' AS DATE), Cast(${TABLE}.Date as Date), Day)<=91
+        WHEN CAST(${TABLE}.Date AS DATE) <= CAST ('2022-05-23' AS DATE) and DATE_DIFF(CAST ('2022-05-23' AS DATE), Cast(${TABLE}.Date as Date), Day)<=91
         THEN ${quantity}
       END ;;
     value_format_name: decimal_0
@@ -284,7 +284,7 @@ ON
     type: sum
     sql:
       CASE
-        WHEN CAST(${TABLE}.Date AS DATE) <= CAST ('2021-05-23' AS DATE) and DATE_DIFF(CAST ('2021-05-23' AS DATE), Cast(${TABLE}.Date as Date), Day)<=366
+        WHEN CAST(${TABLE}.Date AS DATE) <= CAST ('2022-05-23' AS DATE) and DATE_DIFF(CAST ('2022-05-23' AS DATE), Cast(${TABLE}.Date as Date), Day)<=366
         THEN ${quantity}
       END ;;
     value_format_name: decimal_0
@@ -299,7 +299,7 @@ ON
     type: average
     sql:
       CASE
-        WHEN CAST(${TABLE}.Date AS DATE) < CAST ('2021-05-23' AS DATE)
+        WHEN CAST(${TABLE}.Date AS DATE) < CAST ('2022-05-23' AS DATE)
         THEN ${temperature_in_fahrenheit}
         ELSE
           NULL
@@ -310,7 +310,7 @@ ON
     type: average
     sql:
       CASE
-        WHEN CAST(${TABLE}.Date AS DATE) >= CAST ('2021-05-23' AS DATE) AND CAST(${TABLE}.Date AS DATE) < CAST ('2021-05-31' AS DATE)
+        WHEN CAST(${TABLE}.Date AS DATE) >= CAST ('2022-05-23' AS DATE) AND CAST(${TABLE}.Date AS DATE) < CAST ('2022-05-31' AS DATE)
         THEN ${temperature_in_fahrenheit}
         ELSE
           NULL
@@ -337,7 +337,7 @@ ON
     type: average
     sql:
       CASE
-        WHEN CAST(${TABLE}.Date AS DATE) < CAST ('2021-05-23' AS DATE)
+        WHEN CAST(${TABLE}.Date AS DATE) < CAST ('2022-05-23' AS DATE)
         THEN ${historical_demand_plan}
         ELSE
           NULL
@@ -349,7 +349,7 @@ ON
     type: average
     sql:
       CASE
-        WHEN CAST(${TABLE}.Date AS DATE) >= CAST ('2021-05-23' AS DATE)
+        WHEN CAST(${TABLE}.Date AS DATE) >= CAST ('2022-05-23' AS DATE)
         THEN ${historical_demand_plan}
         ELSE
           NULL
@@ -371,7 +371,7 @@ ON
     type: average
     sql:
      CASE
-      WHEN CAST(${TABLE}.Date AS DATE) < CAST ('2021-05-23' AS DATE)
+      WHEN CAST(${TABLE}.Date AS DATE) < CAST ('2022-05-23' AS DATE)
       THEN round(${quantity})
      ELSE
       NULL
@@ -382,7 +382,7 @@ ON
     type: average
     sql:
       CASE
-        WHEN CAST(${TABLE}.Date AS DATE) < CAST ('2021-05-23' AS DATE)
+        WHEN CAST(${TABLE}.Date AS DATE) < CAST ('2022-05-23' AS DATE)
         THEN ${wholesale_quantity}
         ELSE
           NULL
@@ -403,7 +403,7 @@ ON
     type: average
     sql:
       CASE
-        WHEN CAST(${TABLE}.Date AS DATE) < CAST ('2021-05-23' AS DATE)
+        WHEN CAST(${TABLE}.Date AS DATE) < CAST ('2022-05-23' AS DATE)
         THEN ${temperature_in_fahrenheit}
         ELSE NULL
       END ;;
@@ -413,9 +413,9 @@ ON
     type: average
     sql:
       CASE
-        WHEN CAST(${TABLE}.Date AS DATE) >= CAST ('2021-05-23' AS DATE) AND CAST(${TABLE}.Date AS DATE) < CAST ('2021-05-31' AS DATE)
+        WHEN CAST(${TABLE}.Date AS DATE) >= CAST ('2022-05-23' AS DATE) AND CAST(${TABLE}.Date AS DATE) < CAST ('2022-05-31' AS DATE)
         THEN ${temperature_in_fahrenheit}
-        WHEN CAST(${TABLE}.Date AS DATE) >= CAST ('2021-05-31' AS DATE) AND CAST(${TABLE}.Date AS DATE) < CAST ('2021-06-07' AS DATE)
+        WHEN CAST(${TABLE}.Date AS DATE) >= CAST ('2022-05-31' AS DATE) AND CAST(${TABLE}.Date AS DATE) < CAST ('2022-06-07' AS DATE)
         THEN ${temperature_in_fahrenheit}+10
         ELSE NULL
       END ;;
@@ -431,7 +431,7 @@ ON
     type: average
     sql:
       CASE
-        WHEN CAST(${TABLE}.Date AS DATE) >= CAST ('2021-05-23' AS DATE)
+        WHEN CAST(${TABLE}.Date AS DATE) >= CAST ('2022-05-23' AS DATE)
         THEN ${quantity}
         ELSE
           NULL
@@ -444,8 +444,8 @@ ON
     type: average
     sql:
       CASE
-        WHEN CAST(${TABLE}.Date AS DATE) >= CAST ('2021-05-23' AS DATE)
-        THEN ${quantity}+150*date_diff(CAST(${TABLE}.Date AS DATE),CAST ('2021-05-23' AS DATE), month)
+        WHEN CAST(${TABLE}.Date AS DATE) >= CAST ('2022-05-23' AS DATE)
+        THEN ${quantity}+150*date_diff(CAST(${TABLE}.Date AS DATE),CAST ('2022-05-23' AS DATE), month)
         ELSE
          NULL
       END;;
@@ -456,8 +456,8 @@ ON
     type: average
     sql:
       CASE
-        WHEN CAST(${TABLE}.Date AS DATE) >= CAST ('2021-05-23' AS DATE)
-        THEN ${quantity}-150*date_diff(CAST(${TABLE}.Date AS DATE),CAST ('2021-05-23' AS DATE), month)
+        WHEN CAST(${TABLE}.Date AS DATE) >= CAST ('2022-05-23' AS DATE)
+        THEN ${quantity}-150*date_diff(CAST(${TABLE}.Date AS DATE),CAST ('2022-05-23' AS DATE), month)
         ELSE
         NULL
       END;;
@@ -468,9 +468,9 @@ ON
     type: average
     sql:
       CASE
-        WHEN CAST(${TABLE}.Date AS DATE) >= CAST ('2021-05-23' AS DATE) AND CAST(${TABLE}.Date AS DATE) < CAST ('2021-06-07' AS DATE)
+        WHEN CAST(${TABLE}.Date AS DATE) >= CAST ('2022-05-23' AS DATE) AND CAST(${TABLE}.Date AS DATE) < CAST ('2022-06-07' AS DATE)
         THEN ${wholesale_quantity}
-         WHEN CAST(${TABLE}.Date AS DATE) >= CAST ('2021-06-07' AS DATE)
+         WHEN CAST(${TABLE}.Date AS DATE) >= CAST ('2022-06-07' AS DATE)
         THEN ${wholesale_quantity}*0.92
         ELSE
           NULL

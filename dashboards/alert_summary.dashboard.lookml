@@ -1,11 +1,11 @@
 - dashboard: alert_summary
-  title: Demand Shaping - Alerts Summary Dashboard
+  title: Demand sensing - Alerts Summary Dashboard
   layout: newspaper
   preferred_viewer: dashboards-next
   elements:
   - title: Alerts_Table
     name: Alerts_Table
-    model: cortex_dev_v2
+    model: cortex_dem_sens
     explore: aggregated_results_dev_v2
     type: looker_grid
     fields: [aggregated_results_dev_v2.product_name, aggregated_results_dev_v2.customer_name,
@@ -125,7 +125,7 @@
       - Toothpicks
       - Tortilla chips
       - Watermelon Cooler
-    model: cortex_dev_v2
+    model: cortex_dem_sens
     explore: aggregated_results_dev_v2
     listens_to_filters: []
     field: aggregated_results_dev_v2.product_name
@@ -142,7 +142,7 @@
       - Bulls Eye
       - Complete Foods
       - Supermart
-    model: cortex_dev_v2
+    model: cortex_dem_sens
     explore: aggregated_results_dev_v2
     listens_to_filters: []
     field: aggregated_results_dev_v2.customer_name
@@ -170,7 +170,7 @@
       - Portland
       - San Francisco
       - Seattle
-    model: cortex_dev_v2
+    model: cortex_dem_sens
     explore: aggregated_results_dev_v2
     listens_to_filters: []
     field: aggregated_results_dev_v2.location_dma
@@ -188,7 +188,7 @@
       - Heat Wave
       - Non-seasonal Google Trend
       - Promo Differential
-    model: cortex_dev_v2
+    model: cortex_dem_sens
     explore: aggregated_results_dev_v2
     listens_to_filters: []
     field: aggregated_results_dev_v2.differential_alert
@@ -202,21 +202,21 @@
       type: range_slider
       display: inline
       options: []
-    model: cortex_dev_v2
+    model: cortex_dem_sens
     explore: aggregated_results_dev_v2
     listens_to_filters: []
     field: aggregated_results_dev_v2.expected_differential_impact
   - name: Date Range
     title: Date Range
     type: field_filter
-    default_value: 2019/01/01 to 2021/09/01
+    default_value: 2020/01/01 to 2022/09/01
     allow_multiple_values: true
     required: false
     ui_config:
       type: day_range_picker
       display: inline
       options: []
-    model: cortex_dev_v2
+    model: cortex_dem_sens
     explore: aggregated_results_dev_v2
     listens_to_filters: []
     field: aggregated_results_dev_v2.date_date

@@ -9,7 +9,7 @@ view: aggregated_results_testharness_2 {
         FROM
           CAST(Date AS Date)) week_of_year
       FROM
-        `looker-private-demo.TestHarness_CortexIntelligence.AggregatedResults` )
+        `cortex-central-demo-project.TestHarness_CortexIntelligence.AggregatedResults` )
     SELECT
       a.*,
       b.average_temperature,
@@ -24,7 +24,7 @@ view: aggregated_results_testharness_2 {
         LocationDMA,
         AVG(CAST(TemperatureInFahrenheit AS numeric)) average_temperature
       FROM
-        `looker-private-demo.TestHarness_CortexIntelligence.AggregatedResults`
+        `cortex-central-demo-project.TestHarness_CortexIntelligence.AggregatedResults`
       WHERE
         LocationDMA='Boston (Manchester)'
       GROUP BY
@@ -184,11 +184,11 @@ view: aggregated_results_testharness_2 {
     type: string
     sql:
          CASE
-          WHEN ${differential_alert} = 'Forecast Outside Statistical Range' THEN ('cortex_dev_v2::alert_details_forecasting_outside_statistical_range')
-          WHEN ${differential_alert} = 'Promo Differential' THEN ('cortex_dev_v2::demand_shaping__alerts_detail_dashboard_promo_differential')
-          WHEN ${differential_alert} = 'Storm' THEN ('cortex_dev_v2::alert_detail_temp')
-          WHEN ${differential_alert} like 'Heat%' THEN ('cortex_dev_v2::alert_detail_temp')
-          WHEN ${differential_alert} = 'Non-seasonal Google Trend' THEN ('cortex_dev_v2::alert_detail_trends')
+          WHEN ${differential_alert} = 'Forecast Outside Statistical Range' THEN ('cortex_dem_sens::alert_details_forecasting_outside_statistical_range')
+          WHEN ${differential_alert} = 'Promo Differential' THEN ('cortex_dem_sens::demand_sensing__alerts_detail_dashboard_promo_differential')
+          WHEN ${differential_alert} = 'Storm' THEN ('cortex_dem_sens::alert_detail_temp')
+          WHEN ${differential_alert} like 'Heat%' THEN ('cortex_dem_sens::alert_detail_temp')
+          WHEN ${differential_alert} = 'Non-seasonal Google Trend' THEN ('cortex_dem_sens::alert_detail_trends')
           ELSE Null
         END ;;
   }

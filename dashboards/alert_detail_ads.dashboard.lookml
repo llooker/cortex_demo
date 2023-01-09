@@ -1,21 +1,21 @@
 - dashboard: alert_detail_ads
-  title: Demand Shaping - Alerts Detail Dashboard (Ads)
+  title: Demand sensing - Alerts Detail Dashboard (Ads)
   layout: newspaper
   preferred_viewer: dashboards-next
   elements:
-  - name: ''
-    type: text
-    title_text: ''
-    subtitle_text: ''
-    body_text: "<a href=\"https://cortex.cloud.looker.com/dashboards-next/34?Product%20Name=&Customer=&Alert=&Impact=%5B0,20%5D&Ship%20to%20Location=&Sales%20Week=2017%2F01%2F01%20to%202021%2F05%2F02\"\
-      >\n<strong>Home</strong>\n</a> "
-    row: 0
-    col: 0
-    width: 4
-    height: 2
+  #- name: ''
+  #  type: text
+  #  title_text: ''
+  #  subtitle_text: ''
+  #  body_text: "<a href=\"https://cortex.cloud.looker.com/dashboards-next/34?Product%20Name=&Customer=&Alert=&Impact=%5B0,20%5D&Ship%20to%20Location=&Sales%20Week=2017%2F01%2F01%20to%202021%2F05%2F02\"\
+  #    >\n<strong>Home</strong>\n</a> "
+  #  row: 0
+  #  col: 0
+  #  width: 4
+  #  height: 2
   - title: Temperature
     name: Temperature
-    model: cortex_dev_v2
+    model: cortex_dem_sens
     explore: aggregated_results_dev_v2_2
     type: looker_line
     fields: [aggregated_results_dev_v2_2.temperature, aggregated_results_dev_v2_2.date_week,
@@ -105,7 +105,7 @@
     height: 4
   - title: Customer Units Sold - Historical & Forecast
     name: Customer Units Sold - Historical & Forecast
-    model: cortex_dev_v2
+    model: cortex_dem_sens
     explore: aggregated_results_dev_v2_2
     type: looker_line
     fields: [aggregated_results_dev_v2_2.date_week, aggregated_results_dev_v2_2.demand_plan_after_May,
@@ -173,7 +173,7 @@
     height: 4
   - title: Google Trends Insights
     name: Google Trends Insights
-    model: cortex_dev_v2
+    model: cortex_dem_sens
     explore: aggregated_results_dev_v2_2
     type: looker_line
     fields: [aggregated_results_dev_v2_2.date_week, aggregated_results_dev_v2_2.trend,
@@ -250,7 +250,7 @@
     height: 4
   - title: Syndicated Point-of-Sale Data
     name: Syndicated Point-of-Sale Data
-    model: cortex_dev_v2
+    model: cortex_dem_sens
     explore: aggregated_results_dev_v2_2
     type: looker_line
     fields: [aggregated_results_dev_v2_2.date_week, aggregated_results_dev_v2_2.past_sales_quantity,
@@ -327,7 +327,7 @@
     height: 4
   - title: KPI
     name: KPI
-    model: cortex_dev_v2
+    model: cortex_dem_sens
     explore: aggregated_results_dev_v2_2
     type: marketplace_viz_multiple_value::multiple_value-marketplace
     fields: [aggregated_results_dev_v2_2.avg_retail_units_lift_per_1k_impressions,
@@ -415,7 +415,7 @@
     height: 6
   - title: Ads
     name: Ads
-    model: cortex_dev_v2
+    model: cortex_dem_sens
     explore: aggregated_results_dev_v2_2
     type: looker_line
     fields: [aggregated_results_dev_v2_2.date_week, aggregated_results_dev_v2_2.past_sales_quantity,
@@ -534,7 +534,7 @@
       - Toothpicks
       - Tortilla chips
       - Watermelon Cooler
-    model: cortex_dev_v2
+    model: cortex_dem_sens
     explore: aggregated_results_dev_v2_2
     listens_to_filters: []
     field: aggregated_results_dev_v2_2.product_name
@@ -551,7 +551,7 @@
       - Bulls Eye
       - Complete Foods
       - Supermart
-    model: cortex_dev_v2
+    model: cortex_dem_sens
     explore: aggregated_results_dev_v2_2
     listens_to_filters: []
     field: aggregated_results_dev_v2_2.customer_name
@@ -579,21 +579,21 @@
       - Portland
       - San Francisco
       - Seattle
-    model: cortex_dev_v2
+    model: cortex_dem_sens
     explore: aggregated_results_dev_v2_2
     listens_to_filters: []
     field: aggregated_results_dev_v2_2.location_dma
   - name: Date Range
     title: Date Range
     type: field_filter
-    default_value: 2019/01/01 to 2021/08/02
+    default_value: 2020/01/01 to 2022/08/02
     allow_multiple_values: true
     required: false
     ui_config:
       type: day_range_picker
       display: inline
       options: []
-    model: cortex_dev_v2
+    model: cortex_dem_sens
     explore: aggregated_results_dev_v2_2
     listens_to_filters: []
     field: aggregated_results_dev_v2_2.date_date

@@ -1,5 +1,5 @@
 view: aggregated_results_ref {
-  sql_table_name: `looker-private-demo.DemoIntelligence.AggregatedResults`
+  sql_table_name: `cortex-central-demo-project.40_SAP_REPORTING.AggregatedResults`
     ;;
 
   dimension: catalog_item_id {
@@ -153,11 +153,11 @@ view: aggregated_results_ref {
     type: string
     sql:
          CASE
-          WHEN ${differential_alert} = 'Forecast Outside Statistical Range' THEN ('cortex_dev_v2::alert_details_forecasting_outside_statistical_range')
-          WHEN ${differential_alert} = 'Promo Differential' THEN ('cortex_dev_v2::demand_shaping__alerts_detail_dashboard_promo_differential')
-          WHEN ${differential_alert} = 'Storm' THEN ('cortex_dev_v2::alert_detail_temp')
-          WHEN ${differential_alert} like 'Heat%' THEN ('cortex_dev_v2::alert_detail_temp')
-          WHEN ${differential_alert} = 'Non-seasonal Google Trend' THEN ('cortex_dev_v2::alert_detail_trends')
+          WHEN ${differential_alert} = 'Forecast Outside Statistical Range' THEN ('cortex_dem_sens::alert_details_forecasting_outside_statistical_range')
+          WHEN ${differential_alert} = 'Promo Differential' THEN ('cortex_dem_sens::demand_sensing__alerts_detail_dashboard_promo_differential')
+          WHEN ${differential_alert} = 'Storm' THEN ('cortex_dem_sens::alert_detail_temp')
+          WHEN ${differential_alert} like 'Heat%' THEN ('cortex_dem_sens::alert_detail_temp')
+          WHEN ${differential_alert} = 'Non-seasonal Google Trend' THEN ('cortex_dem_sens::alert_detail_trends')
           ELSE Null
         END ;;
   }
@@ -265,7 +265,7 @@ view: aggregated_results_ref {
       type: average
       sql:
       CASE
-        WHEN CAST(${TABLE}.Date AS DATE) < CAST('2021-05-01' AS DATE)
+        WHEN CAST(${TABLE}.Date AS DATE) < CAST('2022-05-01' AS DATE)
         THEN ${demand_plan}
       ELSE
         NULL
@@ -277,7 +277,7 @@ view: aggregated_results_ref {
       type: average
       sql:
       CASE
-        WHEN CAST(${TABLE}.Date AS DATE) >= CAST('2021-05-01' AS DATE)
+        WHEN CAST(${TABLE}.Date AS DATE) >= CAST('2022-05-01' AS DATE)
         THEN ${demand_plan}
       ELSE
         NULL

@@ -17,9 +17,9 @@ view: aggregated_results_testharness {
                             ProductName,
                             LocationDMA
                       ORDER BY DATE ASC) as rank
-    FROM `looker-private-demo.TestHarness_CortexIntelligence.AggregatedResults`
+    FROM `cortex-central-demo-project.TestHarness_CortexIntelligence.AggregatedResults`
     WHERE DifferentialAlert = 'Forecast Outside Statistical Range'
-    AND CAST (DATE AS DATE) > CAST ('2021-05-23' AS DATE)
+    AND CAST (DATE AS DATE) > CAST ('2022-05-23' AS DATE)
     )
    SELECT * EXCEPT (rank)
    FROM tmp
@@ -36,7 +36,7 @@ view: aggregated_results_testharness {
       Past13WeeksUnitsSold,
       Past52WeeksUnitsSold,
       ExpectedDifferentialImpact
-    FROM `looker-private-demo.TestHarness_CortexIntelligence.AggregatedResults`
+    FROM `cortex-central-demo-project.TestHarness_CortexIntelligence.AggregatedResults`
     WHERE DifferentialAlert = 'Promo Differential'
 
     UNION ALL
@@ -50,7 +50,7 @@ view: aggregated_results_testharness {
       Past13WeeksUnitsSold,
       Past52WeeksUnitsSold,
       ExpectedDifferentialImpact
-    FROM `looker-private-demo.TestHarness_CortexIntelligence.AggregatedResults`
+    FROM `cortex-central-demo-project.TestHarness_CortexIntelligence.AggregatedResults`
     WHERE DifferentialAlert = 'Heat Wave'
 
     UNION ALL
@@ -71,9 +71,9 @@ view: aggregated_results_testharness {
                             ProductName,
                             LocationDMA) AS rank
       FROM
-        `looker-private-demo.TestHarness_CortexIntelligence.AggregatedResults`
+        `cortex-central-demo-project.TestHarness_CortexIntelligence.AggregatedResults`
       WHERE DifferentialAlert = 'Non-seasonal Google Trend'
-      AND CAST(Date as DATE) < CAST('2021-05-23' AS DATE)
+      AND CAST(Date as DATE) < CAST('2022-05-23' AS DATE)
     ) as tb
     WHERE rank=1
 
@@ -174,11 +174,11 @@ view: aggregated_results_testharness {
     type: string
     sql:
          CASE
-          WHEN ${differential_alert} = 'Forecast Outside Statistical Range' THEN ('cortex_dev_v2::alert_details_forecasting_outside_statistical_range')
-          WHEN ${differential_alert} = 'Promo Differential' THEN ('cortex_dev_v2::demand_shaping__alerts_detail_dashboard_promo_differential')
-          WHEN ${differential_alert} = 'Storm' THEN ('cortex_dev_v2::alert_detail_temp')
-          WHEN ${differential_alert} like 'Heat%' THEN ('cortex_dev_v2::alert_detail_temp')
-          WHEN ${differential_alert} = 'Non-seasonal Google Trend' THEN ('cortex_dev_v2::alert_detail_trends')
+          WHEN ${differential_alert} = 'Forecast Outside Statistical Range' THEN ('cortex_dem_sens::alert_details_forecasting_outside_statistical_range')
+          WHEN ${differential_alert} = 'Promo Differential' THEN ('cortex_dem_sens::demand_sensing__alerts_detail_dashboard_promo_differential')
+          WHEN ${differential_alert} = 'Storm' THEN ('cortex_dem_sens::alert_detail_temp')
+          WHEN ${differential_alert} like 'Heat%' THEN ('cortex_dem_sens::alert_detail_temp')
+          WHEN ${differential_alert} = 'Non-seasonal Google Trend' THEN ('cortex_dem_sens::alert_detail_trends')
           ELSE Null
         END ;;
   }
@@ -213,11 +213,11 @@ view: aggregated_results_testharness {
     type: string
     sql:
          CASE
-          WHEN ${differential_alert} = 'Forecast Outside Statistical Range' THEN ('cortex_dev_v2::alert_details_forecasting_outside_statistical_range')
-          WHEN ${differential_alert} = 'Promo Differential' THEN ('cortex_dev_v2::demand_shaping__alerts_detail_dashboard_promo_differential')
-          WHEN ${differential_alert} = 'Storm' THEN ('cortex_dev_v2::alert_detail_temp')
-          WHEN ${differential_alert} like 'Heat%' THEN ('cortex_dev_v2::alert_detail_temp')
-          WHEN ${differential_alert} = 'Non-seasonal Google Trend' THEN ('cortex_dev_v2::alert_detail_trends')
+          WHEN ${differential_alert} = 'Forecast Outside Statistical Range' THEN ('cortex_dem_sens::alert_details_forecasting_outside_statistical_range')
+          WHEN ${differential_alert} = 'Promo Differential' THEN ('cortex_dem_sens::demand_sensing__alerts_detail_dashboard_promo_differential')
+          WHEN ${differential_alert} = 'Storm' THEN ('cortex_dem_sens::alert_detail_temp')
+          WHEN ${differential_alert} like 'Heat%' THEN ('cortex_dem_sens::alert_detail_temp')
+          WHEN ${differential_alert} = 'Non-seasonal Google Trend' THEN ('cortex_dem_sens::alert_detail_trends')
           ELSE Null
         END ;;
   }
@@ -245,7 +245,7 @@ view: aggregated_results_testharness {
             WHEN ${TABLE}.ProductName like 'Watermelon%'
             AND ${TABLE}.CustomerName='Bulls Eye'
             AND ${TABLE}.LocationDMA like 'Boston%'
-            AND CAST(${TABLE}.Date AS DATE) = CAST('2021-05-23' AS DATE)
+            AND CAST(${TABLE}.Date AS DATE) = CAST('2022-05-23' AS DATE)
             AND ${TABLE}.DifferentialAlert ='Forecast Outside Statistical Range'
             THEN 10
             WHEN ${TABLE}.ProductName like 'Watermelon%'
@@ -282,7 +282,7 @@ view: aggregated_results_testharness {
           type: sum
           sql:
               CASE
-                WHEN CAST(${TABLE}.Date AS DATE) >= CAST ('2021-05-23' AS DATE) and DATE_DIFF(Cast(${TABLE}.Date as Date), CAST ('2021-05-23' AS DATE), Day)<=91
+                WHEN CAST(${TABLE}.Date AS DATE) >= CAST ('2022-05-23' AS DATE) and DATE_DIFF(Cast(${TABLE}.Date as Date), CAST ('2022-05-23' AS DATE), Day)<=91
                 THEN ${mlforecast_quantity}
               END ;;
           value_format_name: decimal_0
@@ -293,7 +293,7 @@ view: aggregated_results_testharness {
           type: sum
           sql:
               CASE
-                WHEN CAST(${TABLE}.Date AS DATE) <= CAST ('2021-05-23' AS DATE) and DATE_DIFF(CAST ('2021-05-23' AS DATE), Cast(${TABLE}.Date as Date), Day)<=91
+                WHEN CAST(${TABLE}.Date AS DATE) <= CAST ('2022-05-23' AS DATE) and DATE_DIFF(CAST ('2022-05-23' AS DATE), Cast(${TABLE}.Date as Date), Day)<=91
                 THEN ${quantity}
               END ;;
           value_format_name: decimal_0
@@ -303,7 +303,7 @@ view: aggregated_results_testharness {
           type: sum
           sql:
               CASE
-                WHEN CAST(${TABLE}.Date AS DATE) <= CAST ('2021-05-23' AS DATE) and DATE_DIFF(CAST ('2021-05-23' AS DATE), Cast(${TABLE}.Date as Date), Day)<=366
+                WHEN CAST(${TABLE}.Date AS DATE) <= CAST ('2022-05-23' AS DATE) and DATE_DIFF(CAST ('2022-05-23' AS DATE), Cast(${TABLE}.Date as Date), Day)<=366
                 THEN ${quantity}
               END ;;
           value_format_name: decimal_0

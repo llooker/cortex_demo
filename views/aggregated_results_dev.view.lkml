@@ -1,5 +1,5 @@
 view: aggregated_results_dev {
-  sql_table_name: `looker-private-demo.DemoIntelligence.AggregatedResultsDev`
+  sql_table_name: `cortex-central-demo-project.40_SAP_REPORTING.AggregatedResultsDev`
     ;;
 
   dimension: catalog_item_id {
@@ -153,11 +153,11 @@ view: aggregated_results_dev {
     type: string
     sql:
          CASE
-          WHEN ${differential_alert} = 'Forecast Outside Statistical Range' THEN ('cortex_dev_v2::alert_details_forecasting_outside_statistical_range')
-          WHEN ${differential_alert} = 'Promo Differential' THEN ('cortex_dev_v2::demand_shaping__alerts_detail_dashboard_promo_differential')
-          WHEN ${differential_alert} = 'Storm' THEN ('cortex_dev_v2::alert_detail_temp')
-          WHEN ${differential_alert} like 'Heat%' THEN ('cortex_dev_v2::alert_detail_temp')
-          WHEN ${differential_alert} = 'Non-seasonal Google Trend' THEN ('cortex_dev_v2::alert_detail_trends')
+          WHEN ${differential_alert} = 'Forecast Outside Statistical Range' THEN ('cortex_dem_sens::alert_details_forecasting_outside_statistical_range')
+          WHEN ${differential_alert} = 'Promo Differential' THEN ('cortex_dem_sens::demand_sensing__alerts_detail_dashboard_promo_differential')
+          WHEN ${differential_alert} = 'Storm' THEN ('cortex_dem_sens::alert_detail_temp')
+          WHEN ${differential_alert} like 'Heat%' THEN ('cortex_dem_sens::alert_detail_temp')
+          WHEN ${differential_alert} = 'Non-seasonal Google Trend' THEN ('cortex_dem_sens::alert_detail_trends')
           ELSE Null
         END ;;
   }
@@ -192,11 +192,11 @@ view: aggregated_results_dev {
     type: string
     sql:
          CASE
-          WHEN ${differential_alert} = 'Forecast Outside Statistical Range' THEN ('cortex_dev_v2::alert_details_forecasting_outside_statistical_range')
-          WHEN ${differential_alert} = 'Promo Differential' THEN ('cortex_dev_v2::demand_shaping__alerts_detail_dashboard_promo_differential')
-          WHEN ${differential_alert} = 'Storm%' THEN ('cortex_dev_v2::alert_detail_temp')
-          WHEN ${differential_alert} like 'Heat%' THEN ('cortex_dev_v2::alert_detail_temp')
-          WHEN ${differential_alert} = 'Non-seasonal Google Trend' THEN ('cortex_dev_v2::alert_detail_trends')
+          WHEN ${differential_alert} = 'Forecast Outside Statistical Range' THEN ('cortex_dem_sens::alert_details_forecasting_outside_statistical_range')
+          WHEN ${differential_alert} = 'Promo Differential' THEN ('cortex_dem_sens::demand_sensing__alerts_detail_dashboard_promo_differential')
+          WHEN ${differential_alert} = 'Storm%' THEN ('cortex_dem_sens::alert_detail_temp')
+          WHEN ${differential_alert} like 'Heat%' THEN ('cortex_dem_sens::alert_detail_temp')
+          WHEN ${differential_alert} = 'Non-seasonal Google Trend' THEN ('cortex_dem_sens::alert_detail_trends')
           ELSE Null
         END ;;
   }
@@ -307,7 +307,7 @@ view: aggregated_results_dev {
       type: average
       sql:
       CASE
-        WHEN CAST(${TABLE}.Date AS DATE) < CAST('2021-04-26' AS DATE)
+        WHEN CAST(${TABLE}.Date AS DATE) < CAST('2022-04-26' AS DATE)
         THEN ${historical_demand_plan}
       ELSE
         NULL
@@ -319,7 +319,7 @@ view: aggregated_results_dev {
       type: average
       sql:
       CASE
-        WHEN CAST(${TABLE}.Date AS DATE) >= CAST('2021-04-26' AS DATE)
+        WHEN CAST(${TABLE}.Date AS DATE) >= CAST('2022-04-26' AS DATE)
         THEN ${historical_demand_plan}
       ELSE
         NULL
@@ -346,7 +346,7 @@ view: aggregated_results_dev {
       type: average
       sql:
       CASE
-        WHEN CAST(${TABLE}.Date AS DATE) < CAST('2021-04-26' AS DATE)
+        WHEN CAST(${TABLE}.Date AS DATE) < CAST('2022-04-26' AS DATE)
         THEN ${wholesale_quantity}
       ELSE
         NULL

@@ -1,5 +1,5 @@
 
-Cortex Demand Shaping: Readme
+Cortex Demand sensing: Readme
 =============================
 
 = Required Permissions:
