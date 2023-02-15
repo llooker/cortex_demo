@@ -572,7 +572,7 @@
   - name: Date Range
     title: Date Range
     type: field_filter
-    default_value: 2020/01/01 to 2022/08/02
+    default_value: 2021/01/01 to 2022/08/02
     allow_multiple_values: true
     required: false
     ui_config:
